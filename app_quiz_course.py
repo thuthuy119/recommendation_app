@@ -55,12 +55,12 @@ quiz = quiz.rename(columns = {'name':'title'})
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 tfid = TfidfVectorizer()
-vectorTfid =tfid.fit_transform(quiz['questtions']).toarray()
+vectorTfid =tfid.fit_transform(quiz['questtions'].apply(lambda x: np.str_(x))).toarray()
 similarityTfidVect = cosine_similarity(vectorTfid)
 
 from sklearn.feature_extraction.text import CountVectorizer
-cv = CountVectorizer(stop_words = None, lowercase = True)
-vector=cv.fit_transform(quiz['questtions']).toarray()
+cv = CountVectorizer(stop_words = 'english', lowercase = True)
+vector=cv.fit_transform(quiz['questtions'].apply(lambda x: np.str_(x))).toarray()
 similarityCountVect = cosine_similarity(vector)
 
 # # from sklearn.feature_extraction.text import HashingVectorizer
