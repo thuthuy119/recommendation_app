@@ -60,7 +60,7 @@ similarityTfidVect = cosine_similarity(vectorTfid)
 
 from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer(stop_words = None, lowercase = True)
-vector=cv.fit_transform(quiz['description]).toarray()
+vector=cv.fit_transform(quiz['description']).toarray()
 similarityCountVect = cosine_similarity(vector)
 
 # # from sklearn.feature_extraction.text import HashingVectorizer
