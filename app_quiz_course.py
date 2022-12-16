@@ -3,6 +3,9 @@ import streamlit as st
 import requests
 import pandas as pd
 import numpy as np
+py -m pip freeze > requirements.txt
+py -m pip install -r requirements.txt 
+
 # set page setting
 st.set_page_config(page_title='iSpeak Courses')
 
