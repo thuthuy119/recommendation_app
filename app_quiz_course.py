@@ -196,16 +196,16 @@ if button == 'Courses':
         st.write(plots[4])
         # st.write(des[4])
 
-    # col6, col7 = st.columns(2)
-    # with col6:
-    #     st.image(recs[5])
-    #     st.write(plots[5])
-    #     # st.write(des[5])
+    col6, col7 = st.columns(2)
+    with col6:
+        st.image(recs[5])
+        st.write(plots[5])
+        # st.write(des[5])
         
 
-    # with col7:
-    #     st.image(recs[6])
-    #     st.write(plots[6])
+    with col7:
+        st.image(recs[6])
+        st.write(plots[6])
         # st.write(des[6])
     # with col8:
     #     st.image(recs[7])
@@ -213,6 +213,13 @@ if button == 'Courses':
     # with col9:
     #     st.image([8])
     #     st.write(plots[8])
+
+    with st.expander('See details of top 10 best courses'):
+        courses_similar = pd.DataFrame(plots, columns=['name'])
+        courses_similar = courses_similar.merge(data, left_on = 'name', right_on = 'title', how = 'left')
+        courses_similar[['title', 'description', 'tags', 'number_of_units']]
+
+
 
     # last viewed
     st.write("## Last viewed:")
@@ -350,7 +357,7 @@ if button == 'Quiz':
     #     st.image([8])
     #     st.write(plots[8])
 
-    # detail_table = st.expander('See full table')
+
     with st.expander('See details of top 10 suggestions'):
         quiz_similar = pd.DataFrame(plots, columns=['name'])
         quiz_similar = quiz_similar.merge(quiz, left_on = 'name', right_on = 'title', how = 'left')
