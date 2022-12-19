@@ -3,6 +3,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import numpy as np
+import streamlit.components.v1 as components 
 
 # py -m pip install -r requirements.txt 
 
@@ -128,7 +129,7 @@ if button == 'Courses':
         cnt = 0
         for key in dist: 
             cnt = cnt+1
-            if cnt < 15:
+            if cnt < 12:
                 title = data.iloc[key].title
                 try:
                     posterRes, plotRes = get_poster_plot(title) 
@@ -195,16 +196,16 @@ if button == 'Courses':
         st.write(plots[4])
         # st.write(des[4])
 
-    col6, col7 = st.columns(2)
-    with col6:
-        st.image(recs[5])
-        st.write(plots[5])
-        # st.write(des[5])
+    # col6, col7 = st.columns(2)
+    # with col6:
+    #     st.image(recs[5])
+    #     st.write(plots[5])
+    #     # st.write(des[5])
         
 
-    with col7:
-        st.image(recs[6])
-        st.write(plots[6])
+    # with col7:
+    #     st.image(recs[6])
+    #     st.write(plots[6])
         # st.write(des[6])
     # with col8:
     #     st.image(recs[7])
@@ -263,7 +264,7 @@ if button == 'Quiz':
         cnt = 0
         for key in dist: 
             cnt = cnt+1
-            if cnt < 15:
+            if cnt < 12:
                 title = quiz.iloc[key].title
                 try:
                     posterRes, plotRes, plotDes = get_poster_plot(title) 
@@ -349,7 +350,18 @@ if button == 'Quiz':
     #     st.image([8])
     #     st.write(plots[8])
 
+    # detail_table = st.expander('See full table')
+    with st.expander('See details of top 10 suggestions'):
+        quiz_similar = pd.DataFrame(plots, columns=['name'])
+        quiz_similar = quiz_similar.merge(quiz, left_on = 'name', right_on = 'title', how = 'left')
+        quiz_similar[['title', 'level', 'number_of_questions',
+       'quiz_session_number_of_user', 'quiz_session_avg_user_score',
+       'questtions']]
+        
+        # components.html(quiz_similar.set_index('title').to_html(), height = 350, scrolling = True)
+
     # last viewed
+    
     st.write("## Last viewed:")
     r1, r2, r3 = st.columns(3)
     with r1:
@@ -372,4 +384,3 @@ if button == 'Quiz':
             st.write(get_poster_plot(st.session_state.history[2])[1])
         except IndexError:
             pass
-
